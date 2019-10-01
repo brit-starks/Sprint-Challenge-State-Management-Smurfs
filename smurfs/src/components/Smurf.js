@@ -1,31 +1,27 @@
 import React, { useEffect } from 'react';
-import { connect } from '../actions';
+import { connect } from 'react-redux';
 
-import { fetchSmurf } from '../actions';
+import { fetchSmurf } from '../store/actions';
 
-const Smurt = ({fetchSmurf}) => {
-  useEffect(()=> {
+const Smurf = ({ fetchSmurf, smurf, isFetching, error }) => {
+  useEffect(() => {
+//run action creator when component mounts
     fetchSmurf();
-  }, []);
-
-  const fetch = e => {
-    e.preventDefault();
-    fetchSmurf();
-  }
+  }, [fetchSmurf])
 
   if(isFetching) {
-    return <p>...Finding little guys...</p>
+    return <h2>Finding little blue guys!</h2>
   }
-};
+
+  return <h2>It's alive! It's aliveeee!</h2>
+}
 
 const mapStateToProps = state => {
   return {
+    smurf: state.smurf,
     isFetching: state.isFetching,
-    name: state.name,
     error: state.error
   };
 };
 
-export default connect(
-  mapStateToProps, {fetchSmurf: fetchSmurf}
-)(Smurf);
+export default connect(mapStateToProps, { fetchSmurf })(Smurf);

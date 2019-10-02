@@ -12,8 +12,8 @@ const Smurf = ({ fetchSmurf, smurf, isFetching, error }) => {
   if(isFetching) {
     return <h2>Finding little blue guys!</h2>
   }
-
-  return <h2>It's alive! It's aliveeee!</h2>
+  console.log(smurf);
+  return <h2>{smurf.name}</h2>
 }
 
 const mapStateToProps = state => {

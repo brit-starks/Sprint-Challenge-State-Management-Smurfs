@@ -19,7 +19,8 @@ export const reducer = (state = initialState, action) => {
           ...state, 
           smurf: action.payload,
           isFetching: false
-        }
+        };
+
     default: 
     return state;
   }

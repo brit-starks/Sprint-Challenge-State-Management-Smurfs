@@ -3,24 +3,38 @@ import { connect } from 'react-redux';
 
 import { fetchSmurf } from '../store/actions';
 
-const Smurf = ({ fetchSmurf, smurf, isFetching, error }) => {
+const Smurf = ({ fetchSmurf, smurf, isFetching, error, addSmurf, name }) => {
   useEffect(() => {
-//run action creator when component mounts
     fetchSmurf();
   }, [fetchSmurf])
 
   if(isFetching) {
     return <h2>Finding little blue guys!</h2>
   }
+
+  const getSmurf = e => {
+    e.preventDefault();
+    fetchSmurf();
+  }
+
   console.log(smurf);
-  return <h2>{smurf.name}</h2>
+  return (
+    <>
+      <h2>{name}</h2>
+
+      <form>
+        <button onClick={getSmurf}>Get Smurf</button>
+      </form>
+    </>
+  )  
 }
 
 const mapStateToProps = state => {
   return {
     smurf: state.smurf,
     isFetching: state.isFetching,
-    error: state.error
+    error: state.error,
+    name: state.name
   };
 };
 
